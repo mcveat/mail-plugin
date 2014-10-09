@@ -1,7 +1,7 @@
 package mail
 
 import play.api._
-import org.codemonkey.simplejavamail.Mailer
+import org.codemonkey.simplejavamail.{TransportStrategy, Mailer}
 
 /** Play plugin implementation for mailer
   *
@@ -23,8 +23,11 @@ class MailPlugin(app:Application) extends Plugin {
   private lazy val port = app.configuration.getInt("smtp.port") getOrElse DEFAULT_PORT
   private lazy val username = app.configuration.getString("smtp.username") getOrElse ""
   private lazy val password = app.configuration.getString("smtp.password") getOrElse ""
+  private lazy val transport = app.configuration.getString("smtp.transport").map { trans =>
+    TransportStrategy.valueOf(trans)
+  } getOrElse TransportStrategy.SMTP_PLAIN
 
-  private def mailer = new Mailer(host, port, username, password)
+  private def mailer = new Mailer(host, port, username, password, transport)
 
   override def onStart() {
     Logger.debug("Mail plugin starting... ")
