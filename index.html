@@ -44,7 +44,7 @@
         Resolver.url("mcveat.github.com", url("http://mcveat.github.com/releases"))(Resolver.ivyStylePatterns)
     )</code></pre>
 
-<p>and <code>"play.modules.mail" %% "play2-mail-plugin" % "0.3"</code> as a dependency.</p>
+<p>and <code>"play.modules.mail" %% "play2-mail-plugin" % "0.4"</code> as a dependency.</p>
 
 <h3>As a binary</h3>
 
@@ -52,7 +52,7 @@
 
 <ul>
 <li>put the jar available in <code>target/scala-2.10.0</code> to the lib folder of your play app</li>
-<li>publish it localy with <code>sbt publish-local</code> and add <code>"play.modules.mail" %% "play2-mail-plugin" % "0.4-SNAPSHOT"</code> to your build settings.</li>
+<li>publish it localy with <code>sbt publish-local</code> and add <code>"play.modules.mail" %% "play2-mail-plugin" % "0.5-SNAPSHOT"</code> to your build settings.</li>
 </ul>
 
 <h3>As a Git submodule</h3>
@@ -110,9 +110,20 @@ subject and message body (either text or html) is set.</p>
     smtp.port=25
     smtp.username=
     smtp.password=
+    smtp.transport=
 </code></pre>
 
+<p>Supported transports: SMTP_PLAIN (default), SMTP_SSL, SMTP_TLS</p>
+
 <h2>Changelog</h2>
+
+  <h3>version 0.4</h3>
+  <ul>
+    <li>support for SSL/TSL transports in configuration</li>
+    <li>updated to Play Framework 2.2.2</li>
+    <li>No API change</li>
+    <li>Thanks to <a href="https://github.com/tjjalava">@tjjalava</a> for submitting the pull request.</li>
+  </ul>
 
   <h3>version 0.3</h3>
   <ul>
