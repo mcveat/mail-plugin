@@ -1,6 +1,6 @@
 package mail
 
-import play.api.templates.Html
+import play.twirl.api.Html
 import io.Source
 import javax.mail.Message.RecipientType
 import org.codemonkey.simplejavamail.Email

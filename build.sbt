@@ -1,10 +1,10 @@
-scalaVersion := "2.10.0"
+scalaVersion := "2.10.4"
 
 name := "play2-mail-plugin"
 
 organization := "play.modules.mail"
 
-version := "0.5-SNAPSHOT"
+version := "0.5"
 
 resolvers ++= Seq(
     "Typesafe repository snapshots" at "http://repo.typesafe.com/typesafe/snapshots/",
@@ -13,14 +13,16 @@ resolvers ++= Seq(
 
 scalacOptions ++= Seq(
     "-feature",
+    "-deprecation",
     "-language:implicitConversions",
     "-language:reflectiveCalls"
 )
 
 libraryDependencies ++= Seq(
   "org.codemonkey.simplejavamail" % "simple-java-mail" % "2.1",
-  "com.typesafe.play" %% "play" % "2.2.2",
-  "com.typesafe.play" %% "play-test" % "2.2.2" % "test",
-  "org.specs2" %% "specs2" % "2.3.4" % "test",
+  "com.typesafe.play" %% "play" % "2.3.5" % "provided",
+  "com.typesafe.play" %% "twirl-api" % "1.0.2" % "provided",
+  "com.typesafe.play" %% "play-test" % "2.3.5" % "test",
+  "org.specs2" %% "specs2" % "2.4.5-scalaz-7.0.6" % "test",
   "junit" % "junit" % "4.8" % "test"
 )

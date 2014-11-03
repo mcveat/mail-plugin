@@ -16,7 +16,7 @@ object MailActor {
   /** Creates mocked mailer actor ([[mail.MailActor.MailActorMock]]) */
   def startWithMock = Akka.system.actorOf(Props(new MailActorMock()), name = actorName)
   /** Looks up for mailer actor instance */
-  def get = Akka.system.actorFor("/user/%s".format(actorName))
+  def get = Akka.system.actorSelection("/user/%s".format(actorName))
 
   /** Sends email when receiving instance of Email.
     *
