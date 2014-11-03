@@ -8,7 +8,8 @@ version := "0.5"
 
 resolvers ++= Seq(
     "Typesafe repository snapshots" at "http://repo.typesafe.com/typesafe/snapshots/",
-    "Typesafe repository releases" at "http://repo.typesafe.com/typesafe/releases/"
+    "Typesafe repository releases" at "http://repo.typesafe.com/typesafe/releases/",
+    "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases"
 )
 
 scalacOptions ++= Seq(
