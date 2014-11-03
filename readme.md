@@ -17,14 +17,14 @@ To your `Build.scala` add:
         Resolver.url("mcveat.github.com", url("http://mcveat.github.com/releases"))(Resolver.ivyStylePatterns)
     )
 
-and `"play.modules.mail" %% "play2-mail-plugin" % "0.3"` as a dependency.
+and `"play.modules.mail" %% "play2-mail-plugin" % "0.4"` as a dependency.
 
 As a binary
 -----------
 
 Checkout the project, build it from the sources with `sbt package` command. Then either:
 * put the jar available in `target/scala-2.10` to the lib folder of your play app
-* publish it localy with `sbt publish-local` and add `"play.modules.mail" %% "play2-mail-plugin" % "0.4-SNAPSHOT"` to your build settings.
+* publish it localy with `sbt publish-local` and add `"play.modules.mail" %% "play2-mail-plugin" % "0.5-SNAPSHOT"` to your build settings.
 
 As a Git submodule
 ------------------
@@ -78,9 +78,20 @@ In `application.conf` :
         smtp.port=25
         smtp.username=
         smtp.password=
+        smtp.transport=
+
+Supported transports: SMTP\_PLAIN (default), SMTP\_SSL, SMTP\_TLS
 
 Changelog
 =========
+
+version 0.4
+-----------
+
+* support for SSL/TSL transports in configuration
+* updated to Play Framework 2.2.2
+
+No API change. Thanks to [@tjjalava](https://github.com/tjjalava) for submitting the pull request.
 
 version 0.3
 -----------
