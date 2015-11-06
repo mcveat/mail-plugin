@@ -23,7 +23,7 @@
           <li class="download"><a class="buttons" href="https://github.com/mcveat/mail-plugin/zipball/master">Download ZIP</a></li>
           <li class="download"><a class="buttons" href="https://github.com/mcveat/mail-plugin/tarball/master">Download TAR</a></li>
           <li><a class="buttons github" href="https://github.com/mcveat/mail-plugin">View On GitHub</a></li>
-          <li><a class="buttons github" href="api/0.2/index.html">API reference</a></li>
+          <li><a class="buttons github" href="api/0.6/index.html">API reference</a></li>
         </ul>
 
         <p class="header build-status"><a href="https://travis-ci.org/mcveat/mail-plugin"><img src="https://secure.travis-ci.org/mcveat/mail-plugin.png?branch=master"></a></p>
@@ -44,7 +44,7 @@
         Resolver.url("mcveat.github.com", url("http://mcveat.github.com/releases"))(Resolver.ivyStylePatterns)
     )</code></pre>
 
-<p>and <code>"play.modules.mail" %% "play2-mail-plugin" % "0.5"</code> as a dependency.</p>
+<p>and <code>"play.modules.mail" %% "play2-mail-plugin" % "0.6"</code> as a dependency.</p>
 
 <h3>As a binary</h3>
 
@@ -52,7 +52,7 @@
 
 <ul>
 <li>put the jar available in <code>target/scala-2.10.0</code> to the lib folder of your play app</li>
-<li>publish it localy with <code>sbt publish-local</code> and add <code>"play.modules.mail" %% "play2-mail-plugin" % "0.6-SNAPSHOT"</code> to your build settings.</li>
+<li>publish it localy with <code>sbt publish-local</code> and add <code>"play.modules.mail" %% "play2-mail-plugin" % "0.7-SNAPSHOT"</code> to your build settings.</li>
 </ul>
 
 <h3>As a Git submodule</h3>
@@ -69,19 +69,12 @@ Checkout the project in modules/mail-plugin, then do <code>git submodule add</co
 
 <h2>Usage</h2>
 
-<p>Add a play.plugins file in your conf directory with :</p>
-
-<pre><code>    400:mail.MailPlugin
-</code></pre>
-
-<p>Then in your controller, you can do :</p>
-
 <pre><code>    import mail._
     import Mail._
 
-    def sendMail = Action { request =&gt;
+    def sendMail = Action.async { request =&gt;
         val attachment = Source.fromBytes("Ninja should wear black".toCharArray.map(_.toByte))
-        Mail()
+        val result = Mail()
             .from("sender", "sender@example.com")
             .to("receiver", "receiver@example.com")
             .replyTo("ninja master", "master@ninja.com")
@@ -89,14 +82,14 @@ Checkout the project in modules/mail-plugin, then do <code>git submodule add</co
             .withText("body")
             .withAttachments(Attachment("ninja code", attachment, "text/plain")
             .send()
-        Ok("It works")
+        result.flatMap { _ =&gt; Ok("It works") }
     }
 </code></pre>
 
 <p>Mail class utilizes statically typed builder pattern, so <code>send()</code> method is not available before sender, receiver,
 subject and message body (either text or html) is set.</p>
 
-<p>You can check <a href="api/0.2/index.html">this plugin scaladoc</a> too.</p>
+<p>You can check <a href="api/0.6/index.html">this plugin scaladoc</a> too.</p>
 
 <h2>Configuration</h2>
 
@@ -113,9 +106,16 @@ subject and message body (either text or html) is set.</p>
     smtp.transport=
 </code></pre>
 
-<p>Supported transports: SMTP_PLAIN (default), SMTP_SSL, SMTP_TLS</p>
+<p>Supported transports: <code>SMTP_PLAIN</code> (default), <code>SMTP_SSL</code>, <code>SMTP_TLS</code></p>
 
 <h2>Changelog</h2>
+
+  <h3>version 0.6</h3>
+  <ul>
+    <li>updated to Play Framework 2.4.3</li>
+    <li>changed signature of a <code>send()</code> method from <code>Unit</code> to <code>Future[Unit]</code></li>
+  </ul>
+  <a href="api/0.6/index.html">scaladoc</a>
 
   <h3>version 0.5</h3>
   <ul>
@@ -165,6 +165,6 @@ subject and message body (either text or html) is set.</p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
   </body>
 </html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>mail - mail</title>
+          <meta name="description" content="mail - mail" />
+          <meta name="keywords" content="mail mail" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../index.html';
+            var hash = 'mail.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../lib/package_big.png" />
+        
+        <h1>mail</h1><span class="permalink">
+      <a href="../index.html#mail.package" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mail</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="mail.Mail" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Mail[FROM,TO,SUBJECT,BODY]extendsAnyRef"></a>
+      <a id="Mail[FROM,TO,SUBJECT,BODY]:Mail[FROM,TO,SUBJECT,BODY]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Mail.html"><span class="name">Mail</span></a><span class="tparams">[<span name="FROM">FROM</span>, <span name="TO">TO</span>, <span name="SUBJECT">SUBJECT</span>, <span name="BODY">BODY</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#mail.package@Mail[FROM,TO,SUBJECT,BODY]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Mail instance builder</p><div class="fullcomment"><div class="comment cmt"><p>Mail instance builder</p><p>Utilizes statically typed builder pattern. Only instance with <code>from</code>, <code>to</code>, <code>subject</code>and <code>body</code>(either text or html)
+values set can be actually sent to <a href="MailActor$$MailActor.html" class="extype" name="mail.MailActor.MailActor">mail.MailActor.MailActor</a>.
+</p></div></div>
+    </li><li name="mail.MailComponent" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="MailComponentextendsAnyRef"></a>
+      <a id="MailComponent:MailComponent"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="MailComponent.html"><span class="name">MailComponent</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#mail.package@MailComponentextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="mail.MailComponentProvider" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MailComponentProviderextendsMailComponent"></a>
+      <a id="MailComponentProvider:MailComponentProvider"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="MailComponentProvider.html"><span class="name">MailComponentProvider</span></a><span class="result"> extends <a href="MailComponent.html" class="extype" name="mail.MailComponent">MailComponent</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#mail.package@MailComponentProviderextendsMailComponent" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="mail.MailModule" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MailModuleextendsModule"></a>
+      <a id="MailModule:MailModule"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="MailModule.html"><span class="name">MailModule</span></a><span class="result"> extends <span class="extype" name="play.api.inject.Module">Module</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#mail.package@MailModuleextendsModule" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="mail.Mail" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Mail"></a>
+      <a id="Mail:Mail"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Mail$.html"><span class="name">Mail</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#mail.package@Mail" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides <a href="Mail.html" class="extype" name="mail.Mail">mail.Mail</a> instance factory method, case classes and implicits needed to make it work</p>
+    </li><li name="mail.MailActor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="MailActor"></a>
+      <a id="MailActor:MailActor"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="MailActor$.html"><span class="name">MailActor</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#mail.package@MailActor" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Factory for mailer actors (<a href="MailActor$$MailActor.html" class="extype" name="mail.MailActor.MailActor">mail.MailActor.MailActor</a> and <a href="MailActor$$MailActorMock.html" class="extype" name="mail.MailActor.MailActorMock">mail.MailActor.MailActorMock</a>).</p><div class="fullcomment"><div class="comment cmt"><p>Factory for mailer actors (<a href="MailActor$$MailActor.html" class="extype" name="mail.MailActor.MailActor">mail.MailActor.MailActor</a> and <a href="MailActor$$MailActorMock.html" class="extype" name="mail.MailActor.MailActorMock">mail.MailActor.MailActorMock</a>). Provides access
+to actor reference.
+</p></div></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
