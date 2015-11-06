@@ -1,4 +1,4 @@
-scalaVersion := "2.10.4"
+scalaVersion := "2.11.7"
 
 name := "play2-mail-plugin"
 
@@ -16,14 +16,15 @@ scalacOptions ++= Seq(
     "-feature",
     "-deprecation",
     "-language:implicitConversions",
-    "-language:reflectiveCalls"
+    "-language:reflectiveCalls",
+    "-Yrangepos"
 )
 
 libraryDependencies ++= Seq(
-  "org.codemonkey.simplejavamail" % "simple-java-mail" % "2.1",
-  "com.typesafe.play" %% "play" % "2.3.5" % "provided",
-  "com.typesafe.play" %% "twirl-api" % "1.0.2" % "provided",
-  "com.typesafe.play" %% "play-test" % "2.3.5" % "test",
-  "org.specs2" %% "specs2" % "2.4.5-scalaz-7.0.6" % "test",
-  "junit" % "junit" % "4.8" % "test"
+  "org.codemonkey.simplejavamail" % "simple-java-mail" % "2.4",
+  "com.typesafe.play" %% "play" % "2.4.3" % "provided",
+  "com.typesafe.play" %% "twirl-api" % "1.1.1" % "provided",
+  "com.typesafe.play" %% "play-test" % "2.4.3" % "test",
+  "org.specs2" %% "specs2-core" % "3.6.5" % "test",
+  "junit" % "junit" % "4.12" % "test"
 )

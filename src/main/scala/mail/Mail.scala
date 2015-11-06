@@ -5,24 +5,25 @@ import io.Source
 import javax.mail.Message.RecipientType
 import org.codemonkey.simplejavamail.Email
 import javax.mail.internet.MimeUtility
+import play.api.Play.current
 
 /** Provides [[mail.Mail]] instance factory method, case classes and implicits needed to make it work */
 object Mail {
   /** Creates empty Mail instance */
   def apply() = new Mail[UNSET, UNSET, UNSET, UNSET]()
   /** Allows mail instance with all required fields set to be sent */
-  implicit def enableSending(mail: Mail[SET, SET, SET, SET]) = new {
+  implicit def enableSending(mail: Mail[SET, SET, SET, SET]): Object { def send(): Unit } = new {
     def send() { MailActor.get ! toEmail }
     private def toEmail = {
       val e = new Email()
-      mail.from.map { case (name, address) => e.setFromAddress(name, address) }
+      mail.from.foreach((e.setFromAddress _).tupled)
       e.setSubject(mail.subject.get)
       mail.recipients.foreach {
         case ReplyTo(name, address) => e.setReplyToAddress(name, address)
         case r: TypedRecipient => e.addRecipient(r.name, r.address, r.rType)
       }
-      mail.text.map(e.setText(_))
-      mail.html.map(h => e.setTextHTML(h.toString()))
+      mail.text.foreach(e.setText)
+      mail.html.foreach(h => e.setTextHTML(h.toString))
       mail.attachments.foreach { a =>
         e.addAttachment(MimeUtility.encodeText(a.name), a.data.map(_.toByte).toArray, a.mimeType)
       }
