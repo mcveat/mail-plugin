@@ -6,3 +6,4 @@ jdk:
 branches:
     except:
         - gh-pages
+sudo: false
