@@ -44,7 +44,7 @@ Usage
         import mail._
         import Mail._
 
-        def sendMail = Action { request =>
+        def sendMail = Action.async { request =>
             val attachment = Source.fromBytes("Ninja should wear black".toCharArray.map(_.toByte))
             val result = Mail()
                 .from("sender", "sender@example.com")
