@@ -3,7 +3,7 @@ A Play 2.x plugin providing a scala wrapper to simple-java-mail
 
 Build status: [![Build Status](https://secure.travis-ci.org/mcveat/mail-plugin.png?branch=master)](https://travis-ci.org/mcveat/mail-plugin)
 
-[Scaladoc](http://mcveat.github.io/mail-plugin/api/0.2/index.html)
+[Scaladoc](http://mcveat.github.io/mail-plugin/api/0.6/index.html)
 
 Installation
 ============
@@ -17,14 +17,14 @@ To your `Build.scala` add:
         Resolver.url("mcveat.github.com", url("http://mcveat.github.com/releases"))(Resolver.ivyStylePatterns)
     )
 
-and `"play.modules.mail" %% "play2-mail-plugin" % "0.5"` as a dependency.
+and `"play.modules.mail" %% "play2-mail-plugin" % "0.6"` as a dependency.
 
 As a binary
 -----------
 
 Checkout the project, build it from the sources with `sbt package` command. Then either:
-* put the jar available in `target/scala-2.10` to the lib folder of your play app
-* publish it localy with `sbt publish-local` and add `"play.modules.mail" %% "play2-mail-plugin" % "0.6-SNAPSHOT"` to your build settings.
+* put the jar available in `target/scala-2.x` to the lib folder of your play app
+* publish it localy with `sbt publish-local` and add `"play.modules.mail" %% "play2-mail-plugin" % "0.6"` to your build settings.
 
 As a Git submodule
 ------------------
@@ -41,18 +41,12 @@ In your project Build.scala add the dependency to the plugin :
 Usage
 =====
 
-Add a play.plugins file in your conf directory with :
-
-        400:mail.MailPlugin
-
-Then in your controller, you can do :
-
         import mail._
         import Mail._
 
         def sendMail = Action { request =>
             val attachment = Source.fromBytes("Ninja should wear black".toCharArray.map(_.toByte))
-            Mail()
+            val result = Mail()
                 .from("sender", "sender@example.com")
                 .to("receiver", "receiver@example.com")
                 .replyTo("ninja master", "master@ninja.com")
@@ -60,7 +54,7 @@ Then in your controller, you can do :
                 .withText("body")
                 .withAttachments(Attachment("ninja code", attachment, "text/plain")
                 .send()
-            Ok("It works")
+            result.flatMap { _ => Ok("It works") }
         }
 
 Mail class utilizes statically typed builder pattern, so `send()` method is not available before sender, receiver,
@@ -80,10 +74,18 @@ In `application.conf` :
         smtp.password=
         smtp.transport=
 
-Supported transports: SMTP\_PLAIN (default), SMTP\_SSL, SMTP\_TLS
+Supported transports: `SMTP_PLAIN` (default), `SMTP_SSL`, `SMTP_TLS`
 
 Changelog
 =========
+
+version 0.6
+-----------
+
+* updated to Play Framework 2.4.3
+* changed signature of a `send()` method from `Unit` to `Future[Unit]`
+
+[scaladoc](http://mcveat.github.io/mail-plugin/api/0.6/index.html)
 
 version 0.5
 -----------
