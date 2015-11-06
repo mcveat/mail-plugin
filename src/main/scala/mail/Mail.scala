@@ -1,19 +1,31 @@
 package mail
 
+import akka.util.Timeout
 import play.twirl.api.Html
 import io.Source
 import javax.mail.Message.RecipientType
 import org.codemonkey.simplejavamail.Email
 import javax.mail.internet.MimeUtility
 import play.api.Play.current
+import akka.pattern.ask
+import scala.concurrent.Future
+import scala.util.{Try, Failure}
+import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /** Provides [[mail.Mail]] instance factory method, case classes and implicits needed to make it work */
 object Mail {
   /** Creates empty Mail instance */
   def apply() = new Mail[UNSET, UNSET, UNSET, UNSET]()
   /** Allows mail instance with all required fields set to be sent */
-  implicit def enableSending(mail: Mail[SET, SET, SET, SET]): Object { def send(): Unit } = new {
-    def send() { MailActor.get ! toEmail }
+  implicit def enableSending(mail: Mail[SET, SET, SET, SET]): Object { def send(): Future[Unit] } = new {
+    implicit val timeout = Timeout(1.minute)
+    def send(): Future[Unit] = {
+      (MailActor.get ? toEmail).mapTo[Try[Unit]].flatMap {
+        case Failure(e) => Future.failed(e)
+        case _ => Future.successful(())
+      }
+    }
     private def toEmail = {
       val e = new Email()
       mail.from.foreach((e.setFromAddress _).tupled)

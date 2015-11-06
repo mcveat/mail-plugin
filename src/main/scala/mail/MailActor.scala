@@ -1,9 +1,11 @@
 package mail
 
-import play.api.{Application, Logger}
-import play.api.libs.concurrent._
 import akka.actor.{Actor, Props}
-import org.codemonkey.simplejavamail.{MailException, Email, Mailer}
+import org.codemonkey.simplejavamail.{Email, Mailer}
+import play.api.libs.concurrent._
+import play.api.{Application, Logger}
+
+import scala.util.{Success, Try}
 
 /** Factory for mailer actors ([[mail.MailActor.MailActor]] and [[mail.MailActor.MailActorMock]]). Provides access
   * to actor reference.
@@ -30,11 +32,8 @@ object MailActor {
   class MailActor(mailer: Mailer) extends Actor {
     def receive = {
       case email: Email =>
-        try {
+        sender() ! Try {
           mailer.sendMail(email)
-          logger.debug("Email sent")
-        } catch { case e:MailException =>
-          logger.error("Sending email failed", e)
         }
     }
   }
@@ -42,7 +41,9 @@ object MailActor {
   /** Logs event of receiving Email instance as message. */
   class MailActorMock extends Actor {
     def receive = {
-      case _: Email => logger.debug("Email sent to mock")
+      case _: Email =>
+        logger.debug("Email sent to mock")
+        sender() ! Success(())
     }
   }
 }
